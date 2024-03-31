@@ -1,0 +1,312 @@
+\documentclass{article}
+
+\newif\ifanswers
+\answerstrue % comment out to hide answers
+
+\usepackage[compact]{titlesec}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[maxbibnames=99,maxcitenames=1]{biblatex}
+\usepackage{caption}
+\usepackage{hyperref}
+\captionsetup[table]{skip=4pt}
+\usepackage{framed}
+\usepackage{bm}
+\usepackage{minted}
+\usepackage{soul}
+\usepackage[utf8]{vietnam}
+\usepackage[vietnamese,english]{babel}
+
+
+\addbibresource{references.bib} %Import the bibliography file
+\AtNextBibliography{\small}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, patterns, fit}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\rhead{\hmwkAuthorName} % Top left header
+\lhead{\hmwkClass: \hmwkTitle} % Top center head
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newenvironment{answer}{
+    % Uncomment this if using the template to write out your solutions.
+    {\bf Answer:} \sf \begingroup\color{red}
+}{\endgroup}%
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\definecolor{shadecolor}{gray}{0.9}
+
+\lstloadlanguages{Python} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Python, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\footnotesize\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user-defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homeworks 1} % Assignment title
+\newcommand{\hmwkClass}{INT3404E 20 - Image Processing} % Course/class
+\newcommand{\hmwkAuthorName}{Lương Thị Linh - 22028202} % Your name
+
+\newcommand{\ifans}[1]{\ifanswers \color{red} \vspace{5mm} \textbf{Solution: } #1 \color{black} \vspace{5mm} \fi}
+
+% Chris' notes
+\definecolor{CMpurple}{rgb}{0.6,0.18,0.64}
+\newcommand\cm[1]{\textcolor{CMpurple}{\small\textsf{\bfseries CM\@: #1}}}
+\newcommand\cmm[1]{\marginpar{\small\raggedright\textcolor{CMpurple}{\textsf{\bfseries CM\@: #1}}}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\title{
+\vspace{-1in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle} \\ \hmwkAuthorName}\\
+}
+\author{}
+% \date{\textit{\small Updated \today\ at \currenttime}} % Insert date here if you want it to appear below your name
+\date{March 2024}
+
+\setcounter{section}{0} % one-indexing
+\begin{document}
+\maketitle
+
+\section{Bài toán}
+\vspace{20pt}
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\linewidth]{uet.png}
+        \caption{The image coordinate system}
+        \label{fig:enter-labe}
+\end{figure}
+
+\vspace{20pt}
+
+Một bức ảnh có thể được biểu diễn dưới dạng một mảng NumPy của các "pixel", với kích thước H × W × C, trong đó H là chiều cao, W là chiều rộng, và C là số kênh màu. Hình 1 minh họa hệ tọa độ. Gốc tọa độ nằm ở góc trên bên trái và chiều thứ nhất chỉ ra hướng Y (hàng), trong khi chiều thứ hai chỉ ra chiều X (cột). Thông thường, chúng ta sẽ sử dụng một bức ảnh với các kênh màu đưa ra "mức độ" Red, Green, và Blue của mỗi pixel, được gọi tắt là RGB. Giá trị cho mỗi kênh dao động từ 0 (tối nhất) đến 255 (sáng nhất). Tuy nhiên, khi tải một bức ảnh thông qua Matplotlib, phạm vi này sẽ được tỷ lệ từ 0 (tối nhất) đến 1 (sáng nhất) thay vì và sẽ là một số thực, chứ không phải là số nguyên.
+
+Bạn sẽ viết mã Python để tải một bức ảnh, thực hiện một số thao tác trên ảnh và minh họa hiệu ứng của chúng. Bạn sẽ cần lấy file uet.png từ cùng một nơi bạn tải xuống bài tập này.
+
+\clearpage
+\section{Các hàm xử lý ảnh}
+
+\subsection{\texttt{load\_image(image\_path)}}
+\begin{itemize}
+    \item[--] Nhận đầu vào là đường dẫn của ảnh.
+    \item[--] Sử dụng OpenCV để tải ảnh từ tệp tin.
+    \item[--] Chuyển đổi không gian màu từ BGR sang RGB.
+    \item[--] Trả về ảnh RGB đã tải.
+\end{itemize}
+\begin{lstlisting}[language=Python]
+def load_image(image_path):
+    """
+    Load an image from file, using OpenCV
+    """
+    #load image with opencv
+    img = cv2.imread(image_path)
+    # convert BGR to RGB
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return img_rgb
+\end{lstlisting}
+
+
+\subsection{\texttt{display\_image(image, title="Image")}}
+\begin{itemize}
+    \item[--] Nhận đầu vào là ảnh và tiêu đề (mặc định là "Image").
+    \item[--] Sử dụng matplotlib để hiển thị ảnh.
+    \item[--] Tiêu đề ảnh được hiển thị.
+    \item[--] Trục không được hiển thị.
+    \item[--] Gọi \texttt{plt.show()} để hiển thị hình ảnh.
+\end{itemize}
+\begin{lstlisting}[language=Python]
+def display_image(image, title="Image"):
+    """
+    Display an image using matplotlib. Rembember to use plt.show() to display the image
+    """
+    plt.imshow(image, cmap = 'gray')
+    plt.title(title)
+    plt.axis('off')
+    plt.show()
+\end{lstlisting}
+
+\subsection{\texttt{grayscale\_image(image)}}
+\begin{itemize}
+    \item[--] Nhận đầu vào là ảnh màu RGB.
+    \item[--] Chuyển đổi ảnh màu sang ảnh xám sử dụng công thức chuyển đổi:
+    \[
+    p = 0.299R + 0.587G + 0.114B
+    \]
+    Trong đó $R$, $G$, $B$ là giá trị của từng kênh tương ứng.
+    \item[--] Trả về ảnh xám (Kết quả như Figure  \ref{fig:grayscale-image})
+\end{itemize}
+\begin{lstlisting}[language=Python]
+def grayscale_image(image):
+    img_gray = 0.299 * image[:, :, 0] + 0.587 * image[:, :, 1] + 0.114 * image[:, :, 2]
+    return img_gray.astype(np.uint8)
+\end{lstlisting}
+
+\subsection{\texttt{save\_image(image, output\_path)}}
+\begin{itemize}
+    \item[--] Nhận đầu vào là ảnh và đường dẫn đến vị trí lưu.
+    \item[--] Sử dụng OpenCV để lưu ảnh vào tệp tin theo đường dẫn đã cung cấp.
+\end{itemize}
+\begin{lstlisting}[language=Python]
+def save_image(image, output_path):
+    """
+    Save an image to file using OpenCV
+    """
+    cv2.imwrite(output_path, image)
+\end{lstlisting}
+
+\subsection{\texttt{flip\_image(image)}}
+\begin{itemize}
+    \item[--] Nhận đầu vào là ảnh.
+    \item[--] Sử dụng OpenCV để lật ảnh theo chiều ngang.
+    \item[--] Trả về ảnh đã lật (Kết quả như Figure  \ref{fig:flipped-image}).
+\end{itemize}
+\begin{lstlisting}[language=Python]
+def flip_image(image):
+    """
+    Flip an image horizontally using OpenCV
+    """
+    return cv2.flip(image, 1)
+\end{lstlisting}
+
+\subsection{\texttt{rotate\_image(image, angle)}}
+\begin{itemize}
+    \item[--] Nhận đầu vào là ảnh và góc quay.
+    \item[--] Sử dụng OpenCV để xoay ảnh theo góc đã cho.
+    \item[--] Trả về ảnh đã xoay (Kết quả như Figure  \ref{fig:rotated-image}).
+\end{itemize}
+\begin{lstlisting}[language=Python]
+def rotate_image(image, angle):
+    """
+    Rotate an image using OpenCV. The angle is in degrees
+    """
+    rows, cols = image.shape[:2]
+    M = cv2.getRotationMatrix2D((cols/2, rows/2), angle, 1)
+    return cv2.warpAffine(image, M, (cols, rows))
+\end{lstlisting}
+
+\vspace{20pt}
+\section{Kết Quả}
+Tiến hành áp dụng các hàm này vào bức ảnh 'uet.png' được cung cấp và theo dõi các kết quả thu được.
+
+\begin{figure}[htbp]
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{uet.png}
+        \caption{Ảnh gốc.}
+        \label{fig:original-image}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{lena_gray.jpg}
+        \caption{Ảnh chuyển sang màu xám.}
+        \label{fig:grayscale-image}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{lena_gray_flipped.jpg}
+        \caption{Ảnh lật theo chiều ngang.}
+        \label{fig:flipped-image}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{lena_gray_rotated.jpg}
+        \caption{Ảnh xoay $45^o$.}
+        \label{fig:rotated-image}
+    \end{minipage}
+\end{figure}
+\clearpage
+
+\section{Kết luận}
+
+Bài tập này hướng dẫn thực hiện các thao tác cơ bản trên hình ảnh với Python:
+
+\begin{itemize}
+    \item[--] Hiểu cách biểu diễn hình ảnh bằng mảng NumPy.
+    \item[--] Thực hiện các thao tác cơ bản: lật, xoay, chuyển đổi ảnh màu sang ảnh xám.
+    \item[--] Báo cáo kết quả bằng LaTeX.
+\end{itemize}
+
+\textbf{Lợi ích:}
+
+\begin{itemize}
+    \item[--] Nâng cao kỹ năng lập trình Python, tư duy logic và giải quyết vấn đề.
+    \item[--] Rèn luyện kỹ năng viết báo cáo khoa học.
+\end{itemize}
+
+\section{Tham khảo}
+
+Chi tiết về mã nguồn có thể được tìm thấy tại:\\
+Link Github: \href{https://github.com/ltl2702/ImageProcessing/tree/main/HW1}{INT3404E\_HW1}
+
+\printbibliography
+\end{document}
