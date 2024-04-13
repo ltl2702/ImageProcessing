@@ -1,36 +1,22 @@
-# Hướng dẫn Bài tập 1
+# XỬ LÝ ẢNH - INT3404E 20
 
-Kho lưu trữ này chứa mã nguồn và báo cáo cho Bài tập 1. Dưới đây là chi tiết về nhiệm vụ của bài tập và cách sử dụng mã nguồn được cung cấp.
+## Thông tin Sinh viên
+- **Họ và Tên:** Lương Thị Linh
+- **Mã số sinh viên:** 22028202
 
-## Chi tiết Bài tập
+## Giới thiệu
+Đây là kho lưu trữ cho môn học Xử lý Ảnh (INT3404E). Trong kho lưu trữ này, bạn sẽ tìm thấy các bài tập và ví dụ liên quan đến xử lý ảnh, được thực hiện bởi Lương Thị Linh.
 
-### Thư viện Sử dụng
-- OpenCV
-- NumPy
-- Matplotlib
-- LaTeX
+## Cấu trúc thư mục
+1. **HW1**: Bài tập về Xử lý ảnh 1
+    - Học cách sử dụng Python cơ bản, cấu trúc của các chương trình Python, và các thư viện phổ biến như NumPy, OpenCV, Matplotlib, v.v.
+    - Quen với Google Colaboratory và môi trường ảo như Anaconda.
+    - Tài liệu hóa với Latex, quản lý phiên bản mã nguồn với GitHub.
 
-### Biểu diễn Hình ảnh
-Một bức ảnh có thể được biểu diễn dưới dạng một mảng NumPy của "pixel", với các chiều H × W × C, trong đó H là chiều cao, W là chiều rộng, và C là số kênh màu. Hình ảnh dưới đây minh họa hệ tọa độ. Gốc tọa độ nằm ở góc trên bên trái và chiều thứ nhất chỉ ra hướng Y (dòng), trong khi chiều thứ hai chỉ ra chiều X (cột). Thông thường, chúng ta sẽ sử dụng một hình ảnh với các kênh màu cho đỏ, xanh lá cây và xanh lam "cấp độ" của mỗi pixel, được gọi tắt là RGB. Giá trị cho mỗi kênh nằm trong khoảng từ 0 (tối nhất) đến 255 (sáng nhất). Tuy nhiên, khi tải một hình ảnh thông qua Matplotlib, khoảng này sẽ được tỷ lệ từ 0 (tối nhất) đến 1 (sáng nhất) thay vì là một số nguyên.
+2. **HW2**: Bài tập về Xử lý ảnh 2
+    - Hiểu rõ cách hoạt động của các bộ lọc cơ bản trên ảnh.
+    - Đạt được sự hiểu biết vững chắc về thuật toán Biến đổi Fourier (FT).
 
-### Nhiệm vụ Bài tập
-- Viết mã Python để tải một bức ảnh và thực hiện một số thao tác trên ảnh và hiển thị các hiệu ứng của chúng.
-- File `uet.png` là bắt buộc cho nhiệm vụ này. Hãy chắc chắn rằng bạn đã có nó từ cùng nơi mà bạn tải xuống bài tập này.
-- Thực hiện tất cả các hàm trong file `ex1.py`.
-- Báo cáo kết quả của các hàm `flip_image`, `rotate_image`, `grayscale_image` bằng cách sử dụng mẫu LaTeX được cung cấp.
-
-## Nội dung Kho lưu trữ
-
-### File
-1. `ex1.py`: Chứa mã Python thực hiện các hàm biến đổi hình ảnh.
-2. `report.tex`: Mẫu LaTeX để báo cáo kết quả.
-3. `uet.png`: File hình ảnh cần thiết cho việc biến đổi.
-4. `images`: Thư mục chứa các ảnh sau khi biến đổi
-5. `22028202_LuongThiLinh.ipynb`: Bài tập trên Google Colab
-6. `README.md`: File này cung cấp một cái nhìn tổng quan về kho lưu trữ.
-
-### Hướng dẫn
-1. Sao chép kho lưu trữ này vào máy tính cục bộ của bạn.
-2. Đảm bảo bạn đã cài đặt các thư viện cần thiết (`opencv`, `numpy`, `matplotlib`).
-3. Chạy các hàm trong `ex1.py` để thực hiện các biến đổi hình ảnh.
-4. Sử dụng mẫu LaTeX trong `report.tex` để báo cáo kết quả của các hàm `flip_image`, `rotate_image`, và `grayscale_image`.
+## Yêu cầu
+- Python 3.x
+- Các thư viện Python: numpy, opencv-python, matplotlib, v.v.
