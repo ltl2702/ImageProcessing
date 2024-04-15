@@ -13,8 +13,14 @@ def DFT_slow(data):
   returns:
     DFT: Nx1: 1D numpy array 
   """
-  # You need to implement the DFT here
+  N = len(data)
+  DFT = np.zeros(N, dtype=np.complex_)  # Initialize DFT array
 
+  for k in range(N):
+      for n in range(N):
+          DFT[k] += data[n] * np.exp(-2j * np.pi * k * n / N)
+
+  return DFT
 
 def show_img(origin, row_fft, row_col_fft):
     """
@@ -49,9 +55,13 @@ def DFT_2D(gray_img):
         row_fft: (H, W): 2D numpy array that contains the row-wise FFT of the input image
         row_col_fft: (H, W): 2D numpy array that contains the column-wise FFT of the input image
     """
-    # You need to implement the DFT here
-
-
+    # Compute row-wise FFT
+    row_fft = np.fft.fft(gray_img, axis=1)
+    
+    # Compute column-wise FFT
+    row_col_fft = np.fft.fft(row_fft, axis=0)
+    
+    return row_fft, row_col_fft
 
 
 if __name__ == '__main__':
@@ -59,7 +69,7 @@ if __name__ == '__main__':
     # ex1
     # x = np.random.random(1024)
     # print(np.allclose(DFT_slow(x), np.fft.fft(x)))
-  # ex2
+    # ex2
     img = io_url.imread('https://img2.zergnet.com/2309662_300.jpg')
     gray_img = np.mean(img, -1)
     row_fft, row_col_fft = DFT_2D(gray_img)
