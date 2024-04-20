@@ -91,7 +91,7 @@ def psnr(gt_img, smooth_img):
     # Calculate the Mean Squared Error (MSE)
     mse = np.mean((gt_img - smooth_img) ** 2)
     if mse == 0:
-        return 100 # PSNR is infinite, set to a high value
+        return np.Infinity # PSNR is infinite, set to a high value
     # Maximum possible pixel value (typically 255 for 8-bit images)
     max_pixel = 255.0
     # Calculate PSNR using the formula
@@ -122,7 +122,7 @@ def show_res(before_img, after_img):
 
 if __name__ == '__main__':
     img_noise = "ex1_images/noise.png" # <- need to specify the path to the noise image
-    #img_gt = "" # <- need to specify the path to the gt image
+    img_gt = "ex1_images/ori_img.png" # <- need to specify the path to the gt image
     img = read_img(img_noise)
     filter_size = 3
 
@@ -135,4 +135,4 @@ if __name__ == '__main__':
     median_smoothed_img = median_filter(img, filter_size)
     show_res(img, median_smoothed_img)
     print('PSNR score of median filter: ', psnr(img, median_smoothed_img))
-
+    
