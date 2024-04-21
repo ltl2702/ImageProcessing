@@ -27,7 +27,10 @@ def padding_img(img, filter_size=3):
     Return:
         padded_img: cv2 image: the padding image
     """
-    padded_img = np.pad(img, ((filter_size//2, filter_size//2), (filter_size//2, filter_size//2)), mode='edge')
+    h, w = img.shape
+    pad_h = (filter_size - 1) // 2
+    pad_w = (filter_size - 1) // 2
+    padded_img = np.pad(img, ((pad_h, pad_h), (pad_w, pad_w)), mode='edge')
     return padded_img
 
 def mean_filter(img, filter_size=3):
@@ -125,6 +128,8 @@ if __name__ == '__main__':
     img_gt = "ex1_images/ori_img.png" # <- need to specify the path to the gt image
     img = read_img(img_noise)
     filter_size = 3
+    
+    show_res(img, padding_img(img, filter_size = 50))
 
     # Mean filter
     mean_smoothed_img = mean_filter(img, filter_size)
@@ -135,4 +140,8 @@ if __name__ == '__main__':
     median_smoothed_img = median_filter(img, filter_size)
     show_res(img, median_smoothed_img)
     print('PSNR score of median filter: ', psnr(img, median_smoothed_img))
+
+     
+    
+    
     
